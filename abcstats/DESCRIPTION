@@ -1,0 +1,12 @@
+Package: abcstats
+Title: Automatically constructing summary statistics for ABC
+Version: 0.0.0.9000
+Author: Charles Zheng, Bai Jiang
+Description: Automatically constructing summary statistics for ABC
+Depends: R (>= 3.1.2)
+License: GPL (>= 2)
+LazyData: false
+Suggests: knitr, magrittr, rgl, alr4
+VignetteBuilder: knitr
+Imports: pracma, Rcpp (>= 0.11.3)
+LinkingTo: Rcpp, RcppArmadillo
