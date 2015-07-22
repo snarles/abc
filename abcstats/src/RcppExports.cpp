@@ -6,6 +6,20 @@
 
 using namespace Rcpp;
 
+// dnn_predict
+arma::mat dnn_predict(ListOf<NumericMatrix> Ws, ListOf<NumericVector> bs, NumericMatrix x, ListOf<NumericMatrix> Hs);
+RcppExport SEXP abcstats_dnn_predict(SEXP WsSEXP, SEXP bsSEXP, SEXP xSEXP, SEXP HsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< ListOf<NumericMatrix> >::type Ws(WsSEXP);
+    Rcpp::traits::input_parameter< ListOf<NumericVector> >::type bs(bsSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type x(xSEXP);
+    Rcpp::traits::input_parameter< ListOf<NumericMatrix> >::type Hs(HsSEXP);
+    __result = Rcpp::wrap(dnn_predict(Ws, bs, x, Hs));
+    return __result;
+END_RCPP
+}
 // fastPdist2
 NumericMatrix fastPdist2(NumericMatrix Ar, NumericMatrix Br);
 RcppExport SEXP abcstats_fastPdist2(SEXP ArSEXP, SEXP BrSEXP) {
