@@ -70,6 +70,19 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// ising_chain
+NumericMatrix ising_chain(NumericMatrix x, double theta, int nits);
+RcppExport SEXP abcstats_ising_chain(SEXP xSEXP, SEXP thetaSEXP, SEXP nitsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< NumericMatrix >::type x(xSEXP);
+    Rcpp::traits::input_parameter< double >::type theta(thetaSEXP);
+    Rcpp::traits::input_parameter< int >::type nits(nitsSEXP);
+    __result = Rcpp::wrap(ising_chain(x, theta, nits));
+    return __result;
+END_RCPP
+}
 // fastPdist2
 NumericMatrix fastPdist2(NumericMatrix Ar, NumericMatrix Br);
 RcppExport SEXP abcstats_fastPdist2(SEXP ArSEXP, SEXP BrSEXP) {

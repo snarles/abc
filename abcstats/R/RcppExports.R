@@ -39,6 +39,14 @@ dnn_grad <- function(Wbs, x, y) {
     .Call('abcstats_dnn_grad', PACKAGE = 'abcstats', Wbs, x, y)
 }
 
+#' @title Runs MCMC on an Ising matrix
+#' @param x Ising matrix
+#' @param theta Ising parameter
+#' @param nits Number of iterations
+ising_chain <- function(x, theta, nits) {
+    .Call('abcstats_ising_chain', PACKAGE = 'abcstats', x, theta, nits)
+}
+
 #' @title
 #' fastPdist2
 #' @description
