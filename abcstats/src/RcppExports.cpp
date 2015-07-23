@@ -71,15 +71,48 @@ BEGIN_RCPP
 END_RCPP
 }
 // ising_chain
-NumericMatrix ising_chain(NumericMatrix x, double theta, int nits);
+IntegerMatrix ising_chain(IntegerMatrix x, double theta, int nits);
 RcppExport SEXP abcstats_ising_chain(SEXP xSEXP, SEXP thetaSEXP, SEXP nitsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< NumericMatrix >::type x(xSEXP);
+    Rcpp::traits::input_parameter< IntegerMatrix >::type x(xSEXP);
     Rcpp::traits::input_parameter< double >::type theta(thetaSEXP);
     Rcpp::traits::input_parameter< int >::type nits(nitsSEXP);
     __result = Rcpp::wrap(ising_chain(x, theta, nits));
+    return __result;
+END_RCPP
+}
+// intmat
+IntegerMatrix intmat(IntegerMatrix x);
+RcppExport SEXP abcstats_intmat(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< IntegerMatrix >::type x(xSEXP);
+    __result = Rcpp::wrap(intmat(x));
+    return __result;
+END_RCPP
+}
+// random_sign_mat
+IntegerMatrix random_sign_mat(int n);
+RcppExport SEXP abcstats_random_sign_mat(SEXP nSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    __result = Rcpp::wrap(random_sign_mat(n));
+    return __result;
+END_RCPP
+}
+// ising_ss
+int ising_ss(IntegerMatrix x);
+RcppExport SEXP abcstats_ising_ss(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< IntegerMatrix >::type x(xSEXP);
+    __result = Rcpp::wrap(ising_ss(x));
     return __result;
 END_RCPP
 }

@@ -47,6 +47,24 @@ ising_chain <- function(x, theta, nits) {
     .Call('abcstats_ising_chain', PACKAGE = 'abcstats', x, theta, nits)
 }
 
+#' @title Converts to integer matrix
+#' @param x Ising matrix
+intmat <- function(x) {
+    .Call('abcstats_intmat', PACKAGE = 'abcstats', x)
+}
+
+#' @title Generates binomial random matrix of signs
+#' @param n dim
+random_sign_mat <- function(n) {
+    .Call('abcstats_random_sign_mat', PACKAGE = 'abcstats', n)
+}
+
+#' @title Computes SS of Ising matrix
+#' @param x Ising matrix
+ising_ss <- function(x) {
+    .Call('abcstats_ising_ss', PACKAGE = 'abcstats', x)
+}
+
 #' @title
 #' fastPdist2
 #' @description

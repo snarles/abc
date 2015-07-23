@@ -6,6 +6,15 @@ list_sum <- function(l1, l2) {
   l1
 }
 
+#' Elementwise list concatenation
+#' @param l1 List
+#' @param l2 List
+list_rbind <- function(l1, l2) {
+  for (i in 1:length(l1)) l1[[i]] <- rbind(l1[[i]], l2[[i]])
+  l1
+}
+
+
 #' Optimizes the network using sgd
 #' @param Wbs Weights and biases of DNN
 #' @param x_tr Training points, dimension n x p_x
@@ -55,6 +64,6 @@ dnn_sgd_par <- function(Wbs, x_tr, y_tr, x_te, y_te, epoch = 100,
     p_te <- dnn_predict(Wbs, x_te)
     test_costs[i] <- sqrt(f2(p_te - y_te)/dim(y_te)[1])
   }
-  list(Wbs = Wbs, train_costs = train_costs, test_costs = test_costs)
+  list(Wbs = Wbs, train_costs = train_costs, test_costs = test_costs, p_tr = p_tr, p_te = p_te)
 }
  
