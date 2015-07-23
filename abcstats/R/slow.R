@@ -6,14 +6,18 @@
 #' @param rseed Random seed
 #' @return A list containing weight matrices Ws abd  biases bs
 #' @export
-dnn_init_slow <- function(dims, sigma0 = 0.1, rseed = 315) {
+dnn_init_slow <- function(dims, sigma0 = 0.1, rseed = 315, merge = FALSE) {
   set.seed(rseed)
   Ws <- as.list(numeric(length(dims) - 1))
   bs <- as.list(numeric(length(dims) - 1))
   for (i in 1:length(Ws)) {
     Ws[[i]] <- sigma0 * pracma::randn(dims[i], dims[i + 1])
     bs[[i]] <- rep(0, dims[i + 1])
+    if (merge) bs[[i]] <- t(rep(0, dims[i+1]))
   }
+  names(Ws) <- paste0("W", 1:length(Ws) - 1)
+  names(Bs) <- paste0("b", 1:length(Ws) - 1)
+  if (merge) return(c(Ws, bs))
   list(Ws = Ws, bs = bs)
 }
 

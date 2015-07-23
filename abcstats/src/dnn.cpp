@@ -1,4 +1,5 @@
 #include <RcppArmadillo.h>
+#include "abc_functions.h"
 using namespace Rcpp;
 // [[Rcpp:depends(RcppArmadillo)]]
 
