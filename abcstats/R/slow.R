@@ -16,7 +16,7 @@ dnn_init_slow <- function(dims, sigma0 = 0.1, rseed = 315, merge = FALSE) {
     if (merge) bs[[i]] <- t(rep(0, dims[i+1]))
   }
   names(Ws) <- paste0("W", 1:length(Ws) - 1)
-  names(Bs) <- paste0("b", 1:length(Ws) - 1)
+  names(bs) <- paste0("b", 1:length(Ws) - 1)
   if (merge) return(c(Ws, bs))
   list(Ws = Ws, bs = bs)
 }
@@ -48,9 +48,9 @@ dnn_make_hs <- function(Ws, bs, x) {
 dnn_predict_slow <- function(Ws, bs, x) {
   y <- x
   for (i in 1:(length(Ws) - 1)) {
-    y <- tanh(t(t(y %*% Ws[[i]]) + bs[[i]]))
+    y <- tanh(t(t(y %*% Ws[[i]]) + as.numeric(bs[[i]])))
   }
-  y <- t(t(y %*% Ws[[length(Ws)]]) + bs[[length(Ws)]])
+  y <- t(t(y %*% Ws[[length(Ws)]]) + as.numeric(bs[[length(Ws)]]))
   y
 }
 
@@ -65,9 +65,9 @@ dnn_grad_slow <- function(Ws, bs, x, y) {
   Hs <- as.list(numeric(length(Ws)))
   for (i in 1:length(Ws)) {
     if (i == 1) {  
-      Hs[[i]] <- tanh(t(t(x %*% Ws[[i]]) + bs[[i]]))
+      Hs[[i]] <- tanh(t(t(x %*% Ws[[i]]) + as.numeric(bs[[i]])))
     } else {
-      Hs[[i]] <- tanh(t(t(Hs[[i - 1]] %*% Ws[[i]]) + bs[[i]]))
+      Hs[[i]] <- tanh(t(t(Hs[[i - 1]] %*% Ws[[i]]) + as.numeric(bs[[i]])))
     }
   }
   delta <- t(t(Hs[[length(Hs)]] - y))

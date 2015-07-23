@@ -8,3 +8,9 @@ zattach <- function(ll) {
     assign(names(ll)[i], ll[[i]], envir=globalenv())
   }
 }
+
+#' Frobenius norm
+#' 
+#' @param x Vector or matrix
+#' @return sum(x^2)
+f2 <- function(x) sum(x^2)

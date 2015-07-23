@@ -6,17 +6,67 @@
 
 using namespace Rcpp;
 
-// dnn_predict
-arma::mat dnn_predict(ListOf<NumericMatrix> Ws, ListOf<NumericVector> bs, NumericMatrix x, ListOf<NumericMatrix> Hs);
-RcppExport SEXP abcstats_dnn_predict(SEXP WsSEXP, SEXP bsSEXP, SEXP xSEXP, SEXP HsSEXP) {
+// dnn_delta_tanh
+arma::mat dnn_delta_tanh(arma::mat W, arma::mat H, arma::mat delta);
+RcppExport SEXP abcstats_dnn_delta_tanh(SEXP WSEXP, SEXP HSEXP, SEXP deltaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< ListOf<NumericMatrix> >::type Ws(WsSEXP);
-    Rcpp::traits::input_parameter< ListOf<NumericVector> >::type bs(bsSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type W(WSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type H(HSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type delta(deltaSEXP);
+    __result = Rcpp::wrap(dnn_delta_tanh(W, H, delta));
+    return __result;
+END_RCPP
+}
+// dnn_tanh
+arma::mat dnn_tanh(arma::mat W, arma::mat b, arma::mat x);
+RcppExport SEXP abcstats_dnn_tanh(SEXP WSEXP, SEXP bSEXP, SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< arma::mat >::type W(WSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type b(bSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type x(xSEXP);
+    __result = Rcpp::wrap(dnn_tanh(W, b, x));
+    return __result;
+END_RCPP
+}
+// dnn_lin
+arma::mat dnn_lin(arma::mat W, arma::mat b, arma::mat x);
+RcppExport SEXP abcstats_dnn_lin(SEXP WSEXP, SEXP bSEXP, SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< arma::mat >::type W(WSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type b(bSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type x(xSEXP);
+    __result = Rcpp::wrap(dnn_lin(W, b, x));
+    return __result;
+END_RCPP
+}
+// dnn_predict
+arma::mat dnn_predict(ListOf<NumericMatrix> Wbs, NumericMatrix x);
+RcppExport SEXP abcstats_dnn_predict(SEXP WbsSEXP, SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< ListOf<NumericMatrix> >::type Wbs(WbsSEXP);
     Rcpp::traits::input_parameter< NumericMatrix >::type x(xSEXP);
-    Rcpp::traits::input_parameter< ListOf<NumericMatrix> >::type Hs(HsSEXP);
-    __result = Rcpp::wrap(dnn_predict(Ws, bs, x, Hs));
+    __result = Rcpp::wrap(dnn_predict(Wbs, x));
+    return __result;
+END_RCPP
+}
+// dnn_grad
+List dnn_grad(ListOf<NumericMatrix> Wbs, NumericMatrix x, NumericMatrix y);
+RcppExport SEXP abcstats_dnn_grad(SEXP WbsSEXP, SEXP xSEXP, SEXP ySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< ListOf<NumericMatrix> >::type Wbs(WbsSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type y(ySEXP);
+    __result = Rcpp::wrap(dnn_grad(Wbs, x, y));
     return __result;
 END_RCPP
 }
@@ -29,6 +79,18 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< NumericMatrix >::type Ar(ArSEXP);
     Rcpp::traits::input_parameter< NumericMatrix >::type Br(BrSEXP);
     __result = Rcpp::wrap(fastPdist2(Ar, Br));
+    return __result;
+END_RCPP
+}
+// extract_mat
+arma::mat extract_mat(ListOf<NumericMatrix> ll, int i);
+RcppExport SEXP abcstats_extract_mat(SEXP llSEXP, SEXP iSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< ListOf<NumericMatrix> >::type ll(llSEXP);
+    Rcpp::traits::input_parameter< int >::type i(iSEXP);
+    __result = Rcpp::wrap(extract_mat(ll, i));
     return __result;
 END_RCPP
 }
