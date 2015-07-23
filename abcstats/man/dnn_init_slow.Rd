@@ -4,7 +4,7 @@
 \alias{dnn_init_slow}
 \title{Initialize DNN}
 \usage{
-dnn_init_slow(dims, sigma0 = 0.1, rseed = 315)
+dnn_init_slow(dims, sigma0 = 0.1, rseed = 315, merge = FALSE)
 }
 \arguments{
 \item{dims}{Size of each layer}

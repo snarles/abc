@@ -8,5 +8,5 @@ License: GPL (>= 2)
 LazyData: false
 Suggests: knitr, magrittr, rgl, alr4
 VignetteBuilder: knitr
-Imports: pracma, Rcpp (>= 0.11.3)
+Imports: parallel, pracma, Rcpp (>= 0.11.3)
 LinkingTo: Rcpp, RcppArmadillo

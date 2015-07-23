@@ -35,6 +35,16 @@ mus_y <- pracma::randn(k, p_y)
 z <- sample(k, n, TRUE)
 y <- mus_y[z] + 0.1 * pracma::randn(n, p_y)
 x <- mus_x[z] + pracma::randn(n, p_x)
+# train
+x_tr <- x
+y_tr <- y
+
+# test
+z <- sample(k, n, TRUE)
+y <- mus_y[z] + 0.1 * pracma::randn(n, p_y)
+x <- mus_x[z] + pracma::randn(n, p_x)
+x_te <- x
+y_te <- y
 
 
 yh <- dnn_predict(Wbs, x)
@@ -44,3 +54,22 @@ sapply(gr2$dWs, dim)
 f2(gr$dW0 - gr2$dWs[[1]])
 
 sapply(gr, dim)
+
+
+epoch = 30
+reg = 50.0
+minibatch = 25
+alpha0 = 0.03
+mc.cores = 4;
+
+
+res <- dnn_sgd_par(Wbs, x_tr, y_tr, x_te, y_te, epoch, reg, minibatch, alpha0, mc.cores)
+layout(matrix(1:2, 2, 1))
+plot(res$train_costs)
+plot(res$test_costs)
+
+res2 <- dnn_sgd_slow(Wbs[1:4], Wbs[5:8], x_tr, y_tr, x_te, y_te, epoch, reg, minibatch * mc.cores, alpha0)
+layout(matrix(1:2, 2, 1))
+plot(res2$train_costs)
+plot(res2$test_costs)
+
